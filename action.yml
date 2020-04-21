@@ -1,6 +1,6 @@
 name: 'Validate Flux Helm Release'
 description: 'Github Action to validate Flux Helm Releases with kubeval'
-author: 'Stefan Prodan'
+author: 'Stefan Prodan modified by ChemistryGroup'
 branding:
   icon: 'check-square'
   color: 'blue'
@@ -16,7 +16,7 @@ inputs:
     default: 'master'
   helmVersion:
     description: 'Version of Helm to validate against'
-    default: 'v2'
+    default: 'v3'
 outputs:
   numFilesTested:
     description: The number of HelmRelease files which were tested

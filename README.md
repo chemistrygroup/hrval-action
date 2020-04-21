@@ -1,7 +1,6 @@
 # hrval-action
 
-![CI](https://github.com/stefanprodan/hrval-action/workflows/CI/badge.svg)
-[![Docker](https://img.shields.io/badge/Docker%20Hub-stefanprodan%2Fhrval-blue)](https://hub.docker.com/r/stefanprodan/hrval)
+![CI](https://github.com/chemistrygroup/hrval-action/workflows/CI/badge.svg)
 
 This GitHub action validates a Flux 
 [Helm Release](https://docs.fluxcd.io/projects/helm-operator/en/latest/references/helmrelease-custom-resource.html)
@@ -30,17 +29,17 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Validate Helm Releases in test dir
-        uses: stefanprodan/hrval-action@v3.1.0
+        uses: chemistrygroup/hrval-action@v3.1.1
         with:
           helmRelease: test/
       - name: Validate Helm Release from Helm Repo
-        uses: stefanprodan/hrval-action@v3.1.0
+        uses: chemistrygroup/hrval-action@v3.1.0
         with:
           helmRelease: test/flagger.yaml
           helmVersion: v2
           kubernetesVersion: 1.17.0
       - name: Validate Helm Release from Git Repo
-        uses: stefanprodan/hrval-action@v3.1.0
+        uses: chemistrygroup/hrval-action@v3.1.1
         with:
           helmRelease: test/podinfo.yaml
           helmVersion: v3
@@ -89,7 +88,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Validate Helm Releases in test dir
-        uses: stefanprodan/hrval-action@v3.1.0
+        uses: chemistrygroup/hrval-action@v3.1.1
         with:
           helmRelease: test/
         env:
@@ -109,7 +108,7 @@ version: 2.1
 jobs:
   hrval:
     docker:
-      - image: stefanprodan/hrval
+      - image: chemistrygroup/hrval
     steps:
       - checkout
       - run:
