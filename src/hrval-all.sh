@@ -8,9 +8,7 @@ KUBE_VER=${3-master}
 HELM_VER=${4-v2}
 HRVAL="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/hrval.sh"
 
-if [[ ${HELM_VER} == "v2" ]]; then
-    helm init --client-only
-fi
+helm init --client-only
 
 # If the path provided is actually a file, just run hrval against this one file
 if test -f "${DIR}"; then

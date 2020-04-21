@@ -28,8 +28,13 @@ function download {
   CHART_NAME=$(yq r ${1} spec.chart.name)
   CHART_VERSION=$(yq r ${1} spec.chart.version)
   CHART_DIR=${2}/${CHART_NAME}
-  helm repo add ${CHART_NAME} ${CHART_REPO}
-  helm fetch --version ${CHART_VERSION} --untar ${CHART_NAME}/${CHART_NAME} --untardir ${2}
+  if [[ ${3} == "v3" ]]; then
+    helmv3 repo add ${CHART_NAME} ${CHART_REPO}
+    helmv3 fetch --version ${CHART_VERSION} --untar ${CHART_NAME}/${CHART_NAME} --untardir ${2}
+  else
+    helm repo add ${CHART_NAME} ${CHART_REPO}
+    helm fetch --version ${CHART_VERSION} --untar ${CHART_NAME}/${CHART_NAME} --untardir ${2}
+  fi
   echo ${CHART_DIR}
 }
 
@@ -65,7 +70,7 @@ function validate {
 
   if [[ -z "${CHART_PATH}" ]]; then
     echo "Downloading to ${TMPDIR}"
-    CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR}| tail -n1)
+    CHART_DIR=$(download ${HELM_RELEASE} ${TMPDIR} ${HELM_VER} | tail -n1)
   else
     echo "Cloning to ${TMPDIR}"
     CHART_DIR=$(clone ${HELM_RELEASE} ${TMPDIR}| tail -n1)
